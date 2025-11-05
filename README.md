@@ -17,6 +17,6 @@ This CaptureGlobal Win32 option doesnt exist in early versions of DebugView, lik
 
 ToDo.
 
-Copy over the procedures to Install, Change and Remove a service and ALL its fields.
+Copy over the procedures to Install, Change and Remove a service and ALL its fields. currently working in another app, but will copy them across to this app. In the meantime if you want to test this, edit the registry!
 
  
