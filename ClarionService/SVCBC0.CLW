@@ -1,0 +1,23 @@
+  MEMBER('svc.clw')
+
+
+  MAP
+SVCBC0:DctInit    PROCEDURE
+SVCBC0:DctKill    PROCEDURE
+SVCBC0:FilesInit  PROCEDURE
+  END
+
+
+
+
+SVCBC0:DctInit PROCEDURE
+  CODE
+
+
+SVCBC0:FilesInit PROCEDURE
+  CODE
+
+
+SVCBC0:DctKill PROCEDURE
+  CODE
+
