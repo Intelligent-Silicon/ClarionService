@@ -10,6 +10,10 @@ eg, Start, Stop, Pause, Continue, Restart.
 
 C6 App and Dct file, so it can be loaded into later versions of Clarion.
 
+Works on Windows XP through to Windows 11.
+
 ToDo.
 
-Copy over the procedures to Install, Change and Remove a service and ALL its fields. 
+Copy over the procedures to Install, Change and Remove a service and ALL its fields.
+
+ 
