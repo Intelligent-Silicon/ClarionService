@@ -1,0 +1,65 @@
+Started 
+Heap handle: 009B0000
+start process C:\C6 Work\svc\pcWTsvc.exe
+Command line :> C60dbx C:\CLARION6\BIN\C60EE.RED "C:\CLARION6\BIN\C60EE.ini" "C:\C6 Work\svc\pcWTsvc.exe"
+Command line :> "C:\C6 Work\svc\pcWTsvc.exe" 
+Redirection file :> C:\CLARION6\BIN\C60EE.RED
+CREATE_PROCESS_DEBUG_EVENT  ! No image name found
+g.debug_name C:\C6 Work\svc\pcWTsvc.exe
+BaseOfImage                00400000
+CREATE_PROCESS_DEBUG_EVENT: process main thread tid=00000690
+thread handle=00000080
+ntdll.dll Loaded at: 7C900000
+No debug information
+KERNEL32.dll Loaded at: 7C800000
+No debug information
+C60ASCX.dll Loaded at: 007E0000
+No debug information
+C60RUNX.dll Loaded at: 01000000
+WslDb$$NotifyDebugger 010A4190
+ADVAPI32.dll Loaded at: 77DD0000
+No debug information
+RPCRT4.dll Loaded at: 77E70000
+No debug information
+Secur32.dll Loaded at: 77FE0000
+No debug information
+COMCTL32.dll Loaded at: 773D0000
+No debug information
+msvcrt.dll Loaded at: 77C10000
+No debug information
+GDI32.dll Loaded at: 77F10000
+No debug information
+USER32.dll Loaded at: 7E410000
+No debug information
+SHLWAPI.dll Loaded at: 77F60000
+No debug information
+comdlg32.dll Loaded at: 763B0000
+No debug information
+SHELL32.dll Loaded at: 7C9C0000
+No debug information
+MPR.dll Loaded at: 71B20000
+No debug information
+ole32.dll Loaded at: 774E0000
+No debug information
+OLEAUT32.dll Loaded at: 77120000
+No debug information
+oledlg.dll Loaded at: 7DF70000
+No debug information
+WINSPOOL.DRV Loaded at: 73000000
+No debug information
+C60DOSX.dll Loaded at: 007C0000
+No debug information
+ShimEng.dll Loaded at: 5CB70000
+No debug information
+NULL.dll Loaded at: 6F880000
+No debug information
+WINMM.dll Loaded at: 76B40000
+No debug information
+MSACM32.dll Loaded at: 77BE0000
+No debug information
+VERSION.dll Loaded at: 77C00000
+No debug information
+USERENV.dll Loaded at: 769C0000
+No debug information
+UxTheme.dll Loaded at: 5AD70000
+No debug information

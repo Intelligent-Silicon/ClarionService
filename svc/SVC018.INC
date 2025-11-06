@@ -1,0 +1,3 @@
+  MODULE('SVC018.CLW')
+ChangeServiceConfig2A  PROCEDURE
+  END

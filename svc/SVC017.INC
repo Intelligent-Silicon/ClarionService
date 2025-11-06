@@ -1,0 +1,3 @@
+  MODULE('SVC017.CLW')
+OpenSCManagerA         PROCEDURE
+  END

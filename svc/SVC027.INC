@@ -1,0 +1,3 @@
+  MODULE('SVC027.CLW')
+QueryServiceConfig2A   PROCEDURE
+  END

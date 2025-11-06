@@ -1,0 +1,3 @@
+  MODULE('SVC020.CLW')
+CloseSCManagerHandle   PROCEDURE
+  END

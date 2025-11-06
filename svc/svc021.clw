@@ -1,0 +1,40 @@
+
+
+   MEMBER('svc.clw')                                       ! This is a MEMBER module
+
+                     MAP
+                       INCLUDE('SVC021.INC'),ONCE        !Local module procedure declarations
+                     END
+
+
+CloseServiceHandle   PROCEDURE                             ! Declare Procedure
+Loc:RVBool           BYTE                                  !
+ISEQ:Debug      Equate(True)
+  CODE
+    Compile('_***_',ISEQ:Debug)
+    DSS('CloseServiceHandle : Start' )
+    _***_
+    Loc:RVBool = ISWA_CloseServiceHandle( GLLA:CloseServiceHandle, GSCM:ServiceHandle )
+
+    GSCM:ServiceLastError = ISWA_GetLastError()
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('CloseServiceHandle : Loc:RVBool (' & Loc:RVBool & ') = ISWA_CloseServiceHandle( GLLA:CloseServiceHandle (' & GLLA:CloseServiceHandle & '), GSCM:ServiceHandle (' & GSCM:ServiceHandle & ') )' )
+    DSS('CloseServiceHandle : GSCM:SCMLastError (' & GSCM:SCMLastError & ') = ISWA_GetLastError()' )
+
+    _***_
+
+    IF NOT Loc:RVBool
+
+        GEC:ExitApp     = 1
+        GEC:ExitCode    = GSCM:ServiceLastError
+
+    End
+
+! https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-closeservicehandle
+    Compile('_***_',ISEQ:Debug)
+    DSS('CloseServiceHandle : End' )
+    _***_
+! The CloseServiceHandle function does not destroy the service control manager object referred to by the handle.
+! A service control manager object cannot be destroyed.
+! A service object can be destroyed by calling the DeleteService function.

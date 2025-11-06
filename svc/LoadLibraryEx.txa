@@ -1,0 +1,707 @@
+[PROCEDURE]
+NAME LoadLibraryEx
+GLOBAL
+[COMMON]
+FROM ABC Source
+MODIFIED '2025/10/30' ' 9:46:19'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Loc : DLLF ilename:'),USE(?Loc:DLLFilename:Prompt)
+! TEXT,USE(Loc:DLLFilename)
+[REPORTCONTROLS]
+! TEXT,USE(Loc:DLLFilename)
+Loc:DLLFilename          CSTRING(1024)
+!!> IDENT(4294967285),PROMPT('Loc : DLLF ilename:'),HEADER('Loc : DLLF ilename'),PICTURE(@s255)
+[SCREENCONTROLS]
+! PROMPT('Loc : Load Library Search Flags:'),USE(?Loc:LoadLibrarySearchFlags:Prompt)
+! ENTRY(@n-14),USE(Loc:LoadLibrarySearchFlags),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(Loc:LoadLibrarySearchFlags),RIGHT(1)
+Loc:LoadLibrarySearchFlags LONG
+!!> IDENT(4294967284),PROMPT('Loc : Load Library Search Flags:'),HEADER('Loc : Load Library Search Flags'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[SCREENCONTROLS]
+! PROMPT('Loc : Return Address:'),USE(?Loc:ReturnAddress:Prompt)
+! ENTRY(@n-14),USE(Loc:ReturnAddress),RIGHT(1)
+[REPORTCONTROLS]
+! STRING(@n-14),USE(Loc:ReturnAddress),RIGHT(1)
+Loc:ReturnAddress        LONG
+!!> IDENT(4294967283),PROMPT('Loc : Return Address:'),HEADER('Loc : Return Address'),PICTURE(@n-14),JUSTIFY(RIGHT,1)
+[PROMPTS]
+%ProcedureParameters MULTI LONG  ()
+%ProcedureParameterName DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterType DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterDefault DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterOmitted DEPEND %ProcedureParameters LONG TIMES 0
+
+%ProcedureParameterByReference DEPEND %ProcedureParameters LONG TIMES 0
+
+%Parameters DEFAULT  ('')
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+ISEQ:Debug      Equate(True)
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+    Map
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+LoadLibraryEx   Procedure(String pDllFilename, String pProcedureName ),Long
+LoadLibraryEx   Procedure(String pDllFilename, Long pOrdinal, String pProcedureName ),Long
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+    End
+[END]
+EMBED %LocalProcedures
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+LoadLibraryEx   Procedure(String pDllFilename, String pProcedureName )
+
+    Code
+
+    GLLQ:DLLFilename         = pDllFilename
+    GLLQ:LoadLibraryHandle   = ISWA_LoadLibraryExA( GLLQ:DLLFilename, 0, Loc:LoadLibrarySearchFlags )
+
+    IF GLLQ:LoadLibraryHandle
+        GLLQ:ProcedureName       = pProcedureName
+        GLLQ:ProcedureAddress    = ISWA_GetProcAddress( GLLQ:LoadLibraryHandle, Address( GLLQ:ProcedureName ) )
+        IF GLLQ:ProcedureAddress = 0
+            GLLQ:ProcedureName       = pProcedureName
+            GLLQ:ProcedureAddress    = 0
+            GLLQ:Error               = ISWA_GetLastError()
+        Else
+            GLLQ:Error = 0
+        End
+    Else
+        GLLQ:DLLFilename         = pDllFilename
+        GLLQ:LoadLibraryHandle   = 0
+        GLLQ:ProcedureName       = ''
+        GLLQ:ProcedureAddress    = 0
+        GLLQ:Error               = ISWA_GetLastError()
+    End
+    Add( GLLQ:GlobalLoadLibraryQ )
+
+    IF GLLQ:ProcedureAddress
+        Return GLLQ:ProcedureAddress
+    Else
+        Return 0
+    End
+
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+LoadLibraryEx   Procedure(String pDllFilename, long pOrdinal, String pProcedureName )
+
+    Code
+
+    GLLQ:DLLFilename         = pDllFilename
+    GLLQ:LoadLibraryHandle   = ISWA_LoadLibraryExA( GLLQ:DLLFilename, 0, Loc:LoadLibrarySearchFlags )
+
+    IF GLLQ:LoadLibraryHandle
+        GLLQ:ProcedureName       = pProcedureName
+        GLLQ:ProcedureAddress    = ISWA_GetProcAddress( GLLQ:LoadLibraryHandle, pOrdinal )
+        IF GLLQ:ProcedureAddress = 0
+            GLLQ:ProcedureName       = pProcedureName
+            GLLQ:ProcedureAddress    = 0
+            GLLQ:Error               = ISWA_GetLastError()
+        Else
+            GLLQ:Error = 0
+        End
+    Else
+        GLLQ:DLLFilename         = pDllFilename
+        GLLQ:LoadLibraryHandle   = 0
+        GLLQ:ProcedureName       = ''
+        GLLQ:ProcedureAddress    = 0
+        GLLQ:Error               = ISWA_GetLastError()
+    End
+    Add( GLLQ:GlobalLoadLibraryQ )
+
+    IF GLLQ:ProcedureAddress
+        Return GLLQ:ProcedureAddress
+    Else
+        Return 0
+    End
+[END]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3240
+PROPERTY:END
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Start' )
+    _***_
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:LoadLibrarySearchFlags      =   ISEQ:LoadLibraryEx:Load_Library_Search_System32 !+ |
+                                        !ISEQ:LoadLibraryEx:Load_Library_Require_Signed_Target
+
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:LoadLibrarySearchFlags (' & Loc:LoadLibrarySearchFlags & ') = ISEQ:LoadLibraryEx:Load_Library_Search_System32 (' & ISEQ:LoadLibraryEx:Load_Library_Search_System32 & ')' )
+    _***_
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','OpenSCManagerA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''OpenSCManagerA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:OpenSCManagerA = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','CloseServiceHandle')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''CloseServiceHandle'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:CloseServiceHandle  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','CreateServiceA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''CreateServiceA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:CreateServiceA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','OpenServiceA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''OpenServiceA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:OpenServiceA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','DeleteService')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''DeleteService'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:DeleteService  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','QueryServiceConfigA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''QueryServiceConfigA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:QueryServiceConfigA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','QueryServiceConfig2A')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''QueryServiceConfig2A'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:QueryServiceConfig2A  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','ChangeServiceConfigA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''ChangeServiceConfigA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:ChangeServiceConfigA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','ChangeServiceConfig2A')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''ChangeServiceConfig2A'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:ChangeServiceConfig2A  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','StartServiceCtrlDispatcherA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''StartServiceCtrlDispatcherA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:StartServiceCtrlDispatcherA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Advapi32.dll','RegisterServiceCtrlHandlerExA' )
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''RegisterServiceCtrlHandlerA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:RegisterServiceCtrlHandlerA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetVersionExA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''GetVersionExA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetVersionExA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','ExitProcess')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Advapi32.dll'',''ExitProcess'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:ExitProcess  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetCurrentProcess')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''GetCurrentProcess'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetCurrentProcess  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','OpenProcess')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''OpenProcess'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:OpenProcess  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','WideCharToMultiByte')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''WideCharToMultiByte'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:WideCharToMultiByte  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetACP')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''GetACP'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetACP  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','lstrlenW')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''lstrlenW'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:lstrlenW  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetCurrentProcessId')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''GetCurrentProcessId'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetCurrentProcessId  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','CreateToolhelp32Snapshot')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''CreateToolhelp32Snapshot'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:CreateToolhelp32Snapshot  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','Process32First')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''Process32First'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:Process32First  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','Process32Next')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''Process32Next'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:Process32Next  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Shell32.dll','SHGetFolderPathA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Shell32.dll'',''SHGetFolderPathA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:SHGetFolderPathA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('PSapi.dll','GetModuleFileNameExA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''PSapi.dll'',''GetModuleFileNameExA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetModuleFileNameExA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('PSapi.dll','GetProcessImageFileNameA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''PSapi.dll'',''GetProcessImageFileNameA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetProcessImageFileNameA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetModuleFileNameExA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''GetModuleFileNameExA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetModuleFileNameExA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','GetProcessImageFileNameA')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''GetProcessImageFileNameA'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:GetProcessImageFileNameA  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Loc:ReturnAddress = LoadLibraryEx('ntdll.dll','NtQueryInformationProcess')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''ntdll.dll'',''NtQueryInformationProcess'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:NtQueryInformationProcess  = Loc:ReturnAddress
+    End
+
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+!    Loc:ReturnAddress = LoadLibraryEx('Shell32.dll',703,'GUIDFromStringA') ! GUIDFromStringAOrdinal
+!
+!    Compile('_***_',ISEQ:Debug)
+!    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx( ''Shell32.dll'',703,''GUIDFromStringA'')' )
+!    _***_
+!
+!
+!    IF Loc:ReturnAddress
+!        GLLA:GUIDFromStringA = Loc:ReturnAddress
+!    End
+!
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : End' )
+    _***_
+[END]
+[END]
+[PROCEDURE]
+NAME FreeLibraryEx
+GLOBAL
+[COMMON]
+FROM ABC Source
+MODIFIED '2025/10/17' '16:53:46'
+[DATA]
+[SCREENCONTROLS]
+! PROMPT('Loc : Entry Cnt:'),USE(?Loc:EntryCnt:Prompt)
+! ENTRY(@n13),USE(Loc:EntryCnt)
+[REPORTCONTROLS]
+! STRING(@n13),USE(Loc:EntryCnt)
+Loc:EntryCnt             ULONG
+!!> IDENT(4294967293),PROMPT('Loc : Entry Cnt:'),HEADER('Loc : Entry Cnt'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Loc : Cnt:'),USE(?Loc:Cnt:Prompt)
+! ENTRY(@n13),USE(Loc:Cnt)
+[REPORTCONTROLS]
+! STRING(@n13),USE(Loc:Cnt)
+Loc:Cnt                  ULONG
+!!> IDENT(4294967292),PROMPT('Loc : Cnt:'),HEADER('Loc : Cnt'),PICTURE(@n13)
+[SCREENCONTROLS]
+! PROMPT('Loc : RVB ool:'),USE(?Loc:RVBool:Prompt)
+! ENTRY(@n3),USE(Loc:RVBool)
+[REPORTCONTROLS]
+! STRING(@n3),USE(Loc:RVBool)
+Loc:RVBool               BYTE
+!!> IDENT(4294967291),PROMPT('Loc : RVB ool:'),HEADER('Loc : RVB ool'),PICTURE(@n3)
+[PROMPTS]
+%ProcedureParameters MULTI LONG  ()
+%ProcedureParameterName DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterType DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterDefault DEPEND %ProcedureParameters DEFAULT TIMES 0
+
+%ProcedureParameterOmitted DEPEND %ProcedureParameters LONG TIMES 0
+
+%ProcedureParameterByReference DEPEND %ProcedureParameters LONG TIMES 0
+
+%Parameters DEFAULT  ('')
+%GenerateOpenClose LONG  (0)
+%GenerateSaveRestore LONG  (0)
+[EMBED]
+EMBED %ProcessedCode
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 3600
+PROPERTY:END
+    Compile('_***_',ISEQ:Debug)
+    DSS('FreeLibraryEx : Start' )
+    _***_
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+    Loc:EntryCnt    = Records( GLLQ:GlobalLoadLibraryQ )
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('FreeLibraryEx : Loc:EntryCnt (' & Loc:EntryCnt & ')    = Records( GLLQ:GlobalLoadLibraryQ )' )
+    _***_
+
+
+    Loc:Cnt = 0
+    Loop Loc:EntryCnt times
+        Loc:Cnt += 1
+        Get( GLLQ:GlobalLoadLibraryQ, Loc:Cnt )
+
+        Compile('_***_',ISEQ:Debug)
+        DSS('FreeLibraryEx : Get( GLLQ:GlobalLoadLibraryQ, Loc:Cnt (' & Loc:Cnt & ') ) ErrorCode() = ' & ErrorCode() )
+        _***_
+
+        IF ErrorCode() = 0
+            Loc:RVBool = ISWA_FreeLibrary( GLLQ:LoadLibraryHandle )
+
+            Compile('_***_',ISEQ:Debug)
+            DSS('FreeLibraryEx : Loc:RVBool (' & Loc:RVBool & ') = ISWA_FreeLibrary( GLLQ:LoadLibraryHandle (' & GLLQ:LoadLibraryHandle & ') )' )
+            _***_
+
+        End
+    End
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+    Compile('_***_',ISEQ:Debug)
+    DSS('FreeLibraryEx : End' )
+    _***_
+[END]
+EMBED %DataSection
+[DEFINITION]
+[SOURCE]
+PROPERTY:BEGIN
+PRIORITY 4000
+PROPERTY:END
+ISEQ:Debug      Equate(True)
+[END]
+[END]
