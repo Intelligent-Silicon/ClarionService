@@ -536,7 +536,7 @@ ServiceHandlerExA      FUNCTION( Ulong pdwControl, Ulong pdwEventType, Long plpE
 LoadLibraryEx          PROCEDURE   !
      END
      MODULE('SVC005.CLW')
-Count_Service_Instances PROCEDURE   !
+Count_ClarionService_Instances PROCEDURE   !
      END
      MODULE('SVC006.CLW')
 FreeLibraryEx          PROCEDURE   !
@@ -569,13 +569,13 @@ DSC                    PROCEDURE(*Cstring pCstring)   !
 CommandLineProcessor   PROCEDURE   !
      END
      MODULE('SVC024.CLW')
-NtQueryInformationProcess PROCEDURE   !
+NtQueryInformationProcess PROCEDURE   !Get Information about this Exe - eg what called it SCM or File Explorer or something else
      END
      MODULE('SVC025.CLW')
 UnicodeStringToAnsiString FUNCTION( Long pUnicodeStringAddress, *Cstring pAnsiCstring ), Long   !
      END
      MODULE('SVC029.CLW')
-ServiceCheck           PROCEDURE   !
+ServiceInstallCheckDelete PROCEDURE   !
      END
      MODULE('SVC030.CLW')
 GetVersionExA          PROCEDURE   !
@@ -731,8 +731,9 @@ GetVersionExA          PROCEDURE   !
      ! https://www.icetips.com/showarticle.php?articleid=529
    END
 
-GPP:ParentProcessHandle LONG
-GPP:ModuleFilename   CSTRING(1024)
+GSPD:SCMProcessHandle LONG
+GSPD:SCMProcessID    LONG
+GSPD:SCMModuleFilename CSTRING(1024)
 GNTQ:ProcessBasicInformationGrp GROUP,PRE(GNTQ)
 ExitStatus             LONG
 PebBaseAddress         LONG
@@ -817,6 +818,7 @@ wSuiteMask             USHORT
 wProductType           BYTE
 wReserved              BYTE
                      END
+GOVIE:WindowsVersion DECIMAL(10,4)
 GWOE:Event:WaitObjectHandlesArray LONG,DIM(64)
 GWOE:Event:WaitObjectHandlesArrayCnt ULONG
 GWOE:Event:SERVICE_ACCEPT_STOP LONG
@@ -970,7 +972,7 @@ GSCM:DependenciesArrayGrp GROUP,PRE()
 Dependencies           CSTRING(256),DIM(100)
 ArrayNullTerminator    BYTE(0)
                      END
-GSCM:ServiceStartName CSTRING('NT AUTHORITY\LocalService<0>{998}')
+GSCM:ServiceStartName CSTRING('NT AUTHORITY\SYSTEM<0>{1004}')
 GSCM:Password        CSTRING(1024)
 GSCM:QueryServiceConfigAGrp GROUP,PRE(GSCM)
 QS_ServiceType         ULONG
@@ -1238,23 +1240,30 @@ lAdjFDSetting        LONG                                  ! ditto
   DSS('_main : Program Setup : Start' )
   _***_
   
-  CommandLineProcessor()
+  CommandLineProcessor()  ! Get any Command Line switches/flags and process them
   LoadLibraryEx()  ! Dynamically load DLL's using SCLoadLibraryHack.clw
-  GetVersionExA()
-  IF GEC:ExitApp = 1
+  GetVersionExA()         ! Get version of Windows this app is running on
+  NtQueryInformationProcess()     ! Get Information about this Exe - eg what called it SCM or File Explorer or something else
+  Count_ClarionService_Instances() ! Find the "services.exe" process ID and how many instances of this program are running
+  Compile('_***_',ISEQ:DebugGlobal)
+  DSS('_main : Program Setup : IF GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') <> GSPD:SCMProcessID (' & GSPD:SCMProcessID & ')      ! If NOT called by services.exe' )
+  _***_
   
-      a# = ISWA_ExitProcess( GLLA:ExitProcess, GEC:ExitCode )
   
-  End
-  NtQueryInformationProcess()
-  ServiceCheck()
   
-  IF GEC:ExitApp = 1
+  IF GNTQ:InheritedFromUniqueProcessId <> GSPD:SCMProcessID       ! If NOT called by services.exe
+  ServiceInstallCheckDelete()
   
-      a# = ISWA_ExitProcess( GLLA:ExitProcess, GEC:ExitCode )
+  End ! IF GNTQ:InheritedFromUniqueProcessId <> GSPD:SCMProcessID       ! If NOT called by services.exe
   
-  End
-  Count_Service_Instances()
+  Compile('_***_',ISEQ:DebugGlobal)
+  DSS('_main : Program Setup : End ! IF GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') <> GSPD:SCMProcessID (' & GSPD:SCMProcessID & ')      ! If NOT called by services.exe' )
+  _***_
+  Compile('_***_',ISEQ:DebugGlobal)       ! IF GNTQ:InheritedFromUniqueProcessId = GSPD:SCMProcessID       ! If called by services.exe
+  DSS('_main : Program Setup : IF GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') = GSPD:SCMProcessID (' & GSPD:SCMProcessID & ')      ! ! If called by services.exe' )
+  _***_
+  
+  IF GNTQ:InheritedFromUniqueProcessId = GSPD:SCMProcessID       ! If called by services.exe
   Compile('_***_',ISEQ:DebugGlobal)   ! IF Glo:ServiceInstances = 1 - StartServiceCtrlDispatcherA - Only One Instance Can Run StartServiceCtrlDispatcherA
   DSS('_main : Program Setup : IF Glo:ServiceInstances (' & Glo:ServiceInstances & ') = 1' )
   _***_
@@ -1268,7 +1277,7 @@ lAdjFDSetting        LONG                                  ! ditto
       GSCV:lpServiceProc[1]   = Address( ServiceMain )
   
       Compile('_***_',ISEQ:DebugGlobal)
-      DSS('_main : Program Setup : GSCV:lpServiceName[1] (' & GSCV:lpServiceName[1] & ')  = Address( GSCM:ServiceName (' & Address( GSCM:ServiceName ) & ') )' )
+      DSS('_main : Program Setup : GSCV:lpServiceName[1] (' & GSCV:lpServiceName[1] & ')  = Address( GSCM:ServiceName (' & Address( GSCM:ServiceName ) & ') (' & GSCM:ServiceName & ') )' )
       DSS('_main : Program Setup : GSCV:lpServiceProc[1] (' & GSCV:lpServiceProc[1] & ')  = Address( ServiceMain (' & Address( ServiceMain ) & ') )' )
       _***_
   
@@ -1329,6 +1338,11 @@ lAdjFDSetting        LONG                                  ! ditto
       ! You could wrap the MAIN procedure call in this IF statement, in order to shutdown the files and classes properly
   
   End
+  End ! IF GNTQ:InheritedFromUniqueProcessId = GSPD:SCMProcessID       ! If called by services.exe
+  
+  Compile('_***_',ISEQ:DebugGlobal)       ! IF GNTQ:InheritedFromUniqueProcessId = GSPD:SCMProcessID       ! If called by services.exe
+  DSS('_main : Program Setup : End ! IF GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') = GSPD:SCMProcessID (' & GSPD:SCMProcessID & ')      ! ! If called by services.exe' )
+  _***_
   Compile('_***_',ISEQ:DebugGlobal)
   DSS('_main : Program Setup : End' )
   _***_

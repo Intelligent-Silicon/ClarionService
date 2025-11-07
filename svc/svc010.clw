@@ -49,65 +49,76 @@ ISEQ:Debug      Equate(True)
         _***_
 
 
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PARAMCHANGE )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PARAMCHANGE )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_NETBINDCHANGE )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_NETBINDCHANGE )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_HARDWAREPROFILECHANGE )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_HARDWAREPROFILECHANGE )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_POWEREVENT )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_POWEREVENT )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SESSIONCHANGE )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SESSIONCHANGE )' )
-!        _***_
-!
-!        ! In Practice as these are higher numbers, the OS, whatever version it is, will simply ignore these values....
-!        ! Windows Server 2003, Windows XP:  This value is not supported.
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )' )
-!        _***_
-!
-!        ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista:  This control code is not supported.
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )' )
-!        _***_
-!
-!
-!        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )' )
-!        _***_
-!
-!        ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista, Windows Server 2008 R2, Windows 7:  This control code is not supported.
-!        Compile('_***_',ISEQ:Debug)
-!        DSS('SetServiceStatusControlsAccepted : SetServiceStatusControlsAccepted( GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') )' )
-!        _***_
+        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PARAMCHANGE )
+        Compile('_***_',ISEQ:Debug)
+        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PARAMCHANGE )' )
+        _***_
 
+
+        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_NETBINDCHANGE )
+        Compile('_***_',ISEQ:Debug)
+        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_NETBINDCHANGE )' )
+        _***_
+
+
+        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_HARDWAREPROFILECHANGE )
+        Compile('_***_',ISEQ:Debug)
+        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_HARDWAREPROFILECHANGE )' )
+        _***_
+
+
+        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_POWEREVENT )
+        Compile('_***_',ISEQ:Debug)
+        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_POWEREVENT )' )
+        _***_
+
+
+        GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SESSIONCHANGE )
+        Compile('_***_',ISEQ:Debug)
+        DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SESSIONCHANGE )' )
+        _***_
+
+        IF GOVIE:WindowsVersion > 5.2 ! Vista and Server 2008 onwards
+
+            ! In Practice as these are higher numbers, the OS, whatever version it is, will simply ignore these values....
+            ! Windows Server 2003, Windows XP:  This value is not supported.
+            GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )
+            Compile('_***_',ISEQ:Debug)
+            DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )' )
+            _***_
+
+            IF GOVIE:WindowsVersion > 6.0 ! Win 7 and Server 2008 R2 onwards
+                ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista:  This control code is not supported.
+                GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )
+                Compile('_***_',ISEQ:Debug)
+                DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )' )
+                _***_
+
+
+                GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )
+                Compile('_***_',ISEQ:Debug)
+                DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )' )
+                _***_
+
+
+                GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )
+                Compile('_***_',ISEQ:Debug)
+                DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )' )
+                _***_
+
+
+                IF GOVIE:WindowsVersion > 6.1 ! Windows 8 and Server 2012 onwards
+
+                    ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista, Windows Server 2008 R2, Windows 7:  This control code is not supported.
+                    Compile('_***_',ISEQ:Debug)
+                    DSS('SetServiceStatusControlsAccepted : SetServiceStatusControlsAccepted( GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') )' )
+                    _***_
+
+                End ! IF GOVIE:WindowsVersion > 6.1 ! Windows 8 and Server 2012 onwards
+
+            End ! IF GOVIE:WindowsVersion > 6.0 ! Win 7 and Server 2008 R2 onwards
+
+        End ! IF GOVIE:WindowsVersion > 5.2 ! Vista and Server 2008 onwards
 
     Else
 

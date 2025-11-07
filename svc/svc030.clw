@@ -14,28 +14,91 @@ ISEQ:Debug      Equate(True)
     Compile('_***_',ISEQ:Debug)
     DSS('GetVersionExa : Start' )
     _***_
+    Compile('_***_',ISEQ:Debug)
+    DSS('GetVersionExA : GOVIE:dwOSVersionInfoSize (' & GOVIE:dwOSVersionInfoSize & ')')
+    DSS('GetVersionExA : GOVIE:dwMajorVersion (' & GOVIE:dwMajorVersion & ')')
+    DSS('GetVersionExA : GOVIE:dwMinorVersion (' & GOVIE:dwMinorVersion & ')')
+    DSS('GetVersionExA : GOVIE:dwBuildNumber (' & GOVIE:dwBuildNumber & ')')
+    DSS('GetVersionExA : GOVIE:dwPlatformId (' & GOVIE:dwPlatformId & ')')
+    DSS('GetVersionExA : GOVIE:szCSDVersion (' & GOVIE:szCSDVersion & ')')
+    DSS('GetVersionExA : GOVIE:wServicePackMajor (' & GOVIE:wServicePackMajor & ')')
+    DSS('GetVersionExA : GOVIE:wServicePackMinor (' & GOVIE:wServicePackMinor & ')')
+    DSS('GetVersionExA : GOVIE:wSuiteMask (' & GOVIE:wSuiteMask & ')')
+    DSS('GetVersionExA : GOVIE:wProductType (' & GOVIE:wProductType & ')')
+    DSS('GetVersionExA : GOVIE:wReserved (' & GOVIE:wReserved & ')')
+    _***_
+
     GOVIE:dwOSVersionInfoSize = Size( GOVIE:OsVersionInfoExA )
 
-    Loc:RVBool = ISWA_GetVersionExA( GLLA:GetVersionExA, Address(GOVIE:OsVersionInfoExA) )
-
-    IF NOT Loc:RVBool
-
-        GLO:LastError = ISWA_GetLastError()
-
-        Compile('_***_',ISEQ:Debug)
-        DSS('GetVersionExA : Loc:RVBool (' & Loc:RVBool & ') = ISWA_GetVersionExA( GLLA:GetVersionExA (' & GLLA:GetVersionExA & '), Address(GOVIE:OsVersionInfoExA) ) ')
-        DSS('GetVersionExA : GLO:LastError (' & GLO:LastError & ') = ISWA_GetLastError()' )
-        _***_
-
-    Else
-
-        Compile('_***_',ISEQ:Debug)
-        DSS('GetVersionExA : Loc:RVBool (' & Loc:RVBool & ') = ISWA_GetVersionExA( GLLA:GetVersionExA (' & GLLA:GetVersionExA & '), Address(GOVIE:OsVersionInfoExA) ) ')
-        _***_
-
-    End
+    Compile('_***_',ISEQ:Debug)
+    DSS('GetVersionExA : GOVIE:dwOSVersionInfoSize (' & GOVIE:dwOSVersionInfoSize & ') = Size( GOVIE:OsVersionInfoExA )')
+    DSS('GetVersionExA : Loc:RVBool (' & Loc:RVBool & ') = ISWA_GetVersionExA( GLLA:GetVersionExA (' & GLLA:GetVersionExA & '), Address( GOVIE:OsVersionInfoExA ) (' & Address( GOVIE:OsVersionInfoExA ) & ' )')
+    _***_
 
 
+    Loc:RVBool = ISWA_GetVersionExA( GLLA:GetVersionExA, Address( GOVIE:OsVersionInfoExA ) )
+
+    GLO:LastError = ISWA_GetLastError()
+    GOVIE:WindowsVersion    = GOVIE:dwMajorVersion + ( GOVIE:dwMinorVersion / 10 )
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('GetVersionExA : Loc:RVBool (' & Loc:RVBool & ') = ISWA_GetVersionExA( GLLA:GetVersionExA (' & GLLA:GetVersionExA & '), Address( GOVIE:OsVersionInfoExA ) (' & Address( GOVIE:OsVersionInfoExA ) & ' )')
+    DSS('GetVersionExA : GLO:LastError (' & GLO:LastError & ') = ISWA_GetLastError()')
+    DSS('GetVersionExA : GOVIE:dwOSVersionInfoSize (' & GOVIE:dwOSVersionInfoSize & ')')
+    DSS('GetVersionExA : GOVIE:dwMajorVersion (' & GOVIE:dwMajorVersion & ')')
+    DSS('GetVersionExA : GOVIE:dwMinorVersion (' & GOVIE:dwMinorVersion & ')')
+    DSS('GetVersionExA : GOVIE:dwBuildNumber (' & GOVIE:dwBuildNumber & ')')
+    DSS('GetVersionExA : GOVIE:dwPlatformId (' & GOVIE:dwPlatformId & ')')
+    DSS('GetVersionExA : GOVIE:szCSDVersion (' & GOVIE:szCSDVersion & ')')
+    DSS('GetVersionExA : GOVIE:wServicePackMajor (' & GOVIE:wServicePackMajor & ')')
+    DSS('GetVersionExA : GOVIE:wServicePackMinor (' & GOVIE:wServicePackMinor & ')')
+    DSS('GetVersionExA : GOVIE:wSuiteMask (' & GOVIE:wSuiteMask & ')')
+    DSS('GetVersionExA : GOVIE:wProductType (' & GOVIE:wProductType & ')')
+    DSS('GetVersionExA : GOVIE:wReserved (' & GOVIE:wReserved & ')')
+    DSS('GetVersionExA : GOVIE:WindowsVersion (' & GOVIE:WindowsVersion & ')')
+    _***_
+
+!    Operating system        Version number
+!    Windows 11                  10.0*
+!    Windows 10                  10.0*
+!    Windows Server 2022         10.0*
+!    Windows Server 2019         10.0*
+!    Windows Server 2016         10.0*
+!    Windows 8.1                 6.3*
+!    Windows Server 2012 R2      6.3*
+!    Windows 8                   6.2
+!    Windows Server 2012         6.2
+!    Windows 7                   6.1
+!    Windows Server 2008 R2      6.1
+!    Windows Server 2008         6.0
+!    Windows Vista               6.0
+!    Windows Server 2003 R2      5.2
+!    Windows Server 2003         5.2
+!    Windows XP 64-Bit Edition   5.2
+!    Windows XP                  5.1
+!    Windows 2000                5.0
+
+! https://learn.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version
+
+    DSS('GetVersionExA : Operating system        Version number')
+    DSS('GetVersionExA : Windows 11                  10.0*')
+    DSS('GetVersionExA : Windows 10                  10.0*')
+    DSS('GetVersionExA : Windows Server 2022         10.0*')
+    DSS('GetVersionExA : Windows Server 2019         10.0*')
+    DSS('GetVersionExA : Windows Server 2016         10.0*')
+    DSS('GetVersionExA : Windows 8.1                 6.3*')
+    DSS('GetVersionExA : Windows Server 2012 R2      6.3*')
+    DSS('GetVersionExA : Windows 8                   6.2')
+    DSS('GetVersionExA : Windows Server 2012         6.2')
+    DSS('GetVersionExA : Windows 7                   6.1')
+    DSS('GetVersionExA : Windows Server 2008 R2      6.1')
+    DSS('GetVersionExA : Windows Server 2008         6.0')
+    DSS('GetVersionExA : Windows Vista               6.0')
+    DSS('GetVersionExA : Windows Server 2003 R2      5.2')
+    DSS('GetVersionExA : Windows Server 2003         5.2')
+    DSS('GetVersionExA : Windows XP 64-Bit Edition   5.2')
+    DSS('GetVersionExA : Windows XP                  5.1')
+    DSS('GetVersionExA : Windows 2000                5.0')
 !    IF Loc:RVBool
 !        SES:OSMajorVersion          = GOSVI:dwMajorVersion
 !        SES:OSMinorVersion          = GOSVI:dwMinorVersion

@@ -7,10 +7,15 @@
                      END
 
 
-Count_Service_Instances PROCEDURE                          ! Declare Procedure
+Count_ClarionService_Instances PROCEDURE                   ! Declare Procedure
 Loc:SnapshotHandle   LONG                                  !
 Loc:RVBool           BYTE                                  !
-ISEQ:Debug      Equate(False)
+ISEQ:Debug      Equate(True)
+    Map
+
+CheckEXE        Procedure
+
+    End
   CODE
     Compile('_***_',ISEQ:Debug)
     DSS('Count_Service_Instances : Start' )
@@ -36,6 +41,7 @@ ISEQ:Debug      Equate(False)
     DSS('Count_Service_Instances : ISEQ:TH32CS_SNAPPROCESS (' & ISEQ:TH32CS_SNAPPROCESS & '), |' )
     DSS('Count_Service_Instances : 0 ' )
     DSS('Count_Service_Instances : GLO:LastError (' & GLO:LastError & ') = ISWA_GetLastError()' )
+    DSS('Count_Service_Instances : IF Loc:SnapshotHandle (' & Loc:SnapshotHandle & ')' )
     _***_
 
 
@@ -66,19 +72,7 @@ ISEQ:Debug      Equate(False)
 !        DSS('Count_Service_Instances : IF GS:th32ProcessID (' & GS:th32ProcessID & ') = GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ')' )
 !        _***_
 
-        Compile('_***_',ISEQ:Debug)
-        DSS('Count_Service_Instances : IF StrPos( GS:szExeFile (' & GS:szExeFile & ') , ''^'' & GCL:BinaryFilename (' & GCL:BinaryFilename & ') &''$'', True)' )
-        _***_
-
-        IF StrPos(GS:szExeFile, '^' & GCL:BinaryFilename &'$', True)
-
-            Glo:ServiceInstances += 1
-
-            Compile('_***_',ISEQ:Debug)
-            DSS('Count_Service_Instances : Glo:ServiceInstances (' & Glo:ServiceInstances & ') += 1' )
-            _***_
-
-        End
+        CheckEXE()
 
             ! IF GS:szExeFile = 'services.exe', you can use the GS:th32ProcessID to find all processes where
             ! GS:th32ParentProcessID = the 'services.exe' GS:th32ProcessID
@@ -107,9 +101,9 @@ ISEQ:Debug      Equate(False)
 
             Loop
 
-                Loc:RVBool = ISWA_Process32Next( GLLA:Process32Next, |
-                                            Loc:SnapshotHandle, |
-                                            Address( GS:ProcessEntry32 ) )
+                Loc:RVBool = ISWA_Process32Next(    GLLA:Process32Next, |
+                                                    Loc:SnapshotHandle, |
+                                                    Address( GS:ProcessEntry32 ) )
 
                 GLO:LastError   = ISWA_GetLastError()
 
@@ -150,25 +144,7 @@ ISEQ:Debug      Equate(False)
 !                DSS('Count_Service_Instances : IF GS:th32ProcessID (' & GS:th32ProcessID & ') = GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ')' )
 !                _***_
 
-                Compile('_***_',ISEQ:Debug)
-                DSS('Count_Service_Instances : IF StrPos( GS:szExeFile (' & GS:szExeFile & ') , ''^'' & GCL:BinaryFilename (' & GCL:BinaryFilename & ') &''$'', True)' )
-                _***_
-
-                IF StrPos(GS:szExeFile, '^' & GCL:BinaryFilename &'$', True)
-
-                    Glo:ServiceInstances += 1
-
-                    Compile('_***_',ISEQ:Debug)
-                    DSS('Count_Service_Instances : Glo:ServiceInstances (' & Glo:ServiceInstances & ') += 1' )
-
-                    !DSS('Count_Service_Instances : IF StrPos( GS:szExeFile (' & GS:szExeFile & '), ''^services.exe$'', True) (' & StrPos(GS:szExeFile, '^services.exe$', True) & ')' )
-                    !DSS('Count_Service_Instances : GSCV:ServiceMode (' & GSCV:ServiceMode & ') = 1' )
-                    _***_
-
-                    
-
-                End
-
+                CheckEXE()
 
             End
 
@@ -177,41 +153,43 @@ ISEQ:Debug      Equate(False)
 
 
 
-!PROCESSENTRY32 STRUCT
-!  dwSize              ULONG        ! Size of the structure, in bytes
-!  cntUsage            ULONG        ! Number of references to this process
-!  th32ProcessID       ULONG        ! Process ID
-!  th32DefaultHeapID   UNSIGNED     ! Default heap ID (ULONG_PTR; use UNSIGNED for pointer-sized value)
-!  th32ModuleID        ULONG        ! Module ID (not used, always zero)
-!  cntThreads          ULONG        ! Number of threads in the process
-!  th32ParentProcessID ULONG        ! Parent process ID
-!  pcPriClassBase      LONG         ! Base priority of any threads created by this process
-!  dwFlags             ULONG        ! Reserved; always zero
-!  szExeFile           CSTRING(260) ! Executable filename (MAX_PATH = 260)
-!END
-!
-!
-!typedef struct tagPROCESSENTRY32 {
-!  DWORD     dwSize;
-!  DWORD     cntUsage;
-!  DWORD     th32ProcessID;
-!  ULONG_PTR th32DefaultHeapID;
-!  DWORD     th32ModuleID;
-!  DWORD     cntThreads;
-!  DWORD     th32ParentProcessID;
-!  LONG      pcPriClassBase;
-!  DWORD     dwFlags;
-!  CHAR      szExeFile[MAX_PATH];
-!} PROCESSENTRY32;
-!
-
-!ISEQ:TH32CS_SNAPHEAPLIST   EQUATE(1)          ! Includes all heaps of the process in the snapshot.
-!ISEQ:TH32CS_SNAPPROCESS    EQUATE(2)          ! Includes all processes in the system in the snapshot.
-!ISEQ:TH32CS_SNAPTHREAD     EQUATE(4)          ! Includes all threads in the system in the snapshot.
-!ISEQ:TH32CS_SNAPMODULE     EQUATE(8)          ! Includes all modules of the process in the snapshot.
-!ISEQ:TH32CS_SNAPMODULE32   EQUATE(16)         ! Includes all 32-bit modules of the process when called from a 64-bit process.
-!ISEQ:TH32CS_SNAPALL        EQUATE(15)         ! Includes all processes, threads, heaps, and modules in the snapshot.
-!ISEQ:TH32CS_INHERIT        EQUATE(2147483648) ! Indicates that the snapshot handle is to be inheritable.
     Compile('_***_',ISEQ:Debug)
     DSS('Count_Service_Instances : End' )
     _***_
+CheckEXE            Procedure()
+
+
+    Code
+
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('Count_Service_Instances : CheckEXE : IF StrPos( GS:szExeFile (' & GS:szExeFile & ') , ''^services.exe$'', True)' )
+    _***_
+
+    IF StrPos( GS:szExeFile, '^services.exe$', True)
+        GSPD:SCMProcessHandle   = 0
+        GSPD:SCMProcessID       = GS:th32ProcessID
+        GSPD:SCMModuleFilename  = 0
+
+        Compile('_***_',ISEQ:Debug)
+        DSS('Count_Service_Instances : CheckEXE : GSPD:SCMProcessHandle (0) = 0' )
+        DSS('Count_Service_Instances : CheckEXE : GSPD:SCMProcessID (' & GSPD:SCMProcessID & ') = GS:th32ProcessID (' & GS:th32ProcessID & ')' )
+        DSS('Count_Service_Instances : CheckEXE : GSPD:SCMModuleFilename (0) = 0' )
+        _***_
+
+    End
+
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('Count_Service_Instances : CheckEXE : IF StrPos( GS:szExeFile (' & GS:szExeFile & ') , ''^'' & GCL:BinaryFilename (' & GCL:BinaryFilename & ') &''$'', True)' )
+    _***_
+
+    IF StrPos(GS:szExeFile, '^' & GCL:BinaryFilename &'$', True)
+
+        Glo:ServiceInstances += 1
+
+        Compile('_***_',ISEQ:Debug)
+        DSS('Count_Service_Instances : CheckEXE : Glo:ServiceInstances (' & Glo:ServiceInstances & ') += 1' )
+        _***_
+
+    End

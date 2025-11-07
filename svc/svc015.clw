@@ -64,7 +64,7 @@ Loc:Cnt             ULong(0)
         GCL:CommandLineAction = 1
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CommandLineProcessor : GCL:CommandLineAction = 1' )
+        DSS('CommandLineProcessor : GCL:CommandLineAction = 1 ! Install' )
         _***_
 
     End
@@ -73,7 +73,7 @@ Loc:Cnt             ULong(0)
         GCL:CommandLineAction = 2
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CommandLineProcessor : GCL:CommandLineAction = 2' )
+        DSS('CommandLineProcessor : GCL:CommandLineAction = 2 ! Check' )
         _***_
 
     End
@@ -82,30 +82,10 @@ Loc:Cnt             ULong(0)
         GCL:CommandLineAction = 3
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CommandLineProcessor : GCL:CommandLineAction = 3' )
+        DSS('CommandLineProcessor : GCL:CommandLineAction = 3 ! Delete' )
         _***_
 
     End
-
-!    Loc:StrPos = StrPos( GCLF:RawString, '/DebugOutput', True )
-!
-!    IF Loc:StrPos
-!
-!        GCLF:LogToDebugOutput = 1
-!
-!    End
-!
-!    Loc:StrPos = StrPos( GCLF:RawString, '/DeleteAllFiles', True )
-!
-!    IF Loc:StrPos
-!        Remove(GFP:DebugOutputFile)
-!        Remove(GFP:SettingsFile)
-!        Remove(GFP:ErrorLogFile)
-!        Remove(GFP:PowerBroadcastFile)
-!        Remove(GFP:SessionsFile)
-!        Remove(GFP:SysTrayFile)
-!        Remove(GFP:WindowLogFile)
-!    End
 
     Compile('_***_',ISEQ:Debug)
     DSS('CommandLineProcessor : End' )

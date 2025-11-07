@@ -12,16 +12,15 @@ Loc:RVBool           BYTE                                  !
 ISEQ:Debug      Equate(True)
   CODE
     Compile('_***_',ISEQ:Debug)
-    DSS('CloseServiceHandle : Start' )
+    DSS('CloseSCManagerHandle : Start' )
     _***_
     Loc:RVBool = ISWA_CloseServiceHandle( GLLA:CloseServiceHandle, GSCM:SCMHandle )
 
     GSCM:SCMLastError = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CloseServiceHandle : Loc:RVBool (' & Loc:RVBool & ') = ISWA_CloseServiceHandle( GLLA:CloseServiceHandle (' & GLLA:CloseServiceHandle & '), GSCM:ServiceHandle (' & GSCM:ServiceHandle & ') ) & ISWA_GetLastError() (' & ISWA_GetLastError() & ')' )
-
-    DSS('CloseServiceHandle : GSCM:SCMLastError (' & GSCM:SCMLastError & ') = ISWA_GetLastError() ')
+    DSS('CloseSCManagerHandle : Loc:RVBool (' & Loc:RVBool & ') = ISWA_CloseServiceHandle( GLLA:CloseServiceHandle (' & GLLA:CloseServiceHandle & '), GSCM:SCMHandle (' & GSCM:SCMHandle & ') )' )
+    DSS('CloseSCManagerHandle : GSCM:SCMLastError (' & GSCM:SCMLastError & ') = ISWA_GetLastError() ')
     _***_
 
     IF NOT Loc:RVBool
@@ -34,7 +33,7 @@ ISEQ:Debug      Equate(True)
 
 ! https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nf-winsvc-closeservicehandle
     Compile('_***_',ISEQ:Debug)
-    DSS('CloseServiceHandle : End' )
+    DSS('CloseSCManagerHandle : End' )
     _***_
 ! The CloseServiceHandle function does not destroy the service control manager object referred to by the handle.
 ! A service control manager object cannot be destroyed.

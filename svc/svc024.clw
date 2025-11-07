@@ -87,7 +87,7 @@ ISEQ:Debug      Equate(True)
 
         Compile('_***_',ISEQ:Debug)     
         DSS('NtQueryInformationProcess : GNTQ:UniqueProcessId (' & GNTQ:UniqueProcessId & ')' )
-        DSS('NtQueryInformationProcess : GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ')' )
+        DSS('NtQueryInformationProcess : GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') ! - services.exe, explorer.exe or something else' )
         _***_
 
         Peek( GNTQ:PebBaseAddress, GNTQ:PEB )
@@ -104,10 +104,10 @@ ISEQ:Debug      Equate(True)
         _***_
 
 
-        Loc:RVLong = UnicodeStringToAnsiString( GNTQ:RTL_ImagePath_Buffer, GPP:ModuleFilename )   ! Not used any more
+        Loc:RVLong = UnicodeStringToAnsiString( GNTQ:RTL_ImagePath_Buffer, GSPD:SCMModuleFilename )   ! Not used any more
 
         Compile('_***_',ISEQ:Debug)
-        DSS('NtQueryInformationProcess : Loc:RVLong (' & Loc:RVLong & ') = UnicodeStringToAnsiString( GNTQ:RTL_ImagePath_Buffer, GPP:ModuleFilename (' & GPP:ModuleFilename & ') )' )
+        DSS('NtQueryInformationProcess : Loc:RVLong (' & Loc:RVLong & ') = UnicodeStringToAnsiString( GNTQ:RTL_ImagePath_Buffer, GSPD:SCMModuleFilename (' & GSPD:SCMModuleFilename & ') )' )
         _***_
 
 
