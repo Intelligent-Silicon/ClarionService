@@ -31,10 +31,15 @@ If no command line switch/flag is specified, default action is for Check to proc
 Prefix a switch/flag with \, / or - , eg \install, /install or -install.
 
 If the Service Control Manager (SCM) calls/loads the program, SCM runs like this:
+
 Loads app normally, ie PROGRAM global code runs.
+
 StartServiceCtrlDispatcherA is called, passing the address of where to find the SERVICEMAIN procedure in the app.
+
 Service Control Manager (SCM) starts a new thread and calls/steps into the SERVICEMAIN procedure.
+
 AttachThreadToClarion( True ) has to be the very first line of code after CODE in order to intialise the Clarion runtime, globals and classes.
+
 RegisterServiceCtrlHandlerExA is called early on, which passes the address of the HandlerEx callback procedure to the SCM.
 Fill in the SetServiceStatus fields and call it, to tell the SCM what type of Service this app is.
 
