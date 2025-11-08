@@ -74,7 +74,7 @@ ISEQ:Debug      Equate(True)
             _***_
 
 
-            IF NOT StrPos( GCL:CommandLineFlags, '^[\\|\/]install',True)
+            IF NOT StrPos( GCL:CommandLineFlags, '^[\\|\/|-]install',True)
                 GEC:ExitApp     = 1
                 GEC:ExitCode    = GSCM:SCMLastError ! Use/Pass on Window Error Codes
             End

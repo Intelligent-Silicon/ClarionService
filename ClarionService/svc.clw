@@ -905,7 +905,7 @@ DS2_ResetPeriod          ULONG
 DS2_RebootMsgAddress     LONG
 DS2_RebootMsg            CSTRING('Clarion Service is rebooting unexpectedly. Notify Intelligent Silicon ASAP.<0>{948}')
 DS2_CommandAddress       LONG
-DS2_Command              CSTRING('pcWTsvc.exe<0>{1012}')
+DS2_Command              CSTRING('ClarionService.exe<0>{1005}')
 DS2_Actions              ULONG(3)
 DS2_SC_ActionsAddress    LONG
 DS2_SC_Action            GROUP,PRE(GSCM),DIM(10)
@@ -1245,7 +1245,7 @@ lAdjFDSetting        LONG                                  ! ditto
   GetVersionExA()         ! Get version of Windows this app is running on
   NtQueryInformationProcess()     ! Get Information about this Exe - eg what called it SCM or File Explorer or something else
   Count_ClarionService_Instances() ! Find the "services.exe" process ID and how many instances of this program are running
-  Compile('_***_',ISEQ:DebugGlobal)
+  Compile('_***_',ISEQ:DebugGlobal)  ! IF GNTQ:InheritedFromUniqueProcessId <> GSPD:SCMProcessID       ! If NOT called by services.exe
   DSS('_main : Program Setup : IF GNTQ:InheritedFromUniqueProcessId (' & GNTQ:InheritedFromUniqueProcessId & ') <> GSPD:SCMProcessID (' & GSPD:SCMProcessID & ')      ! If NOT called by services.exe' )
   _***_
   

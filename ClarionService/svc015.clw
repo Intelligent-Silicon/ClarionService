@@ -60,7 +60,7 @@ Loc:Cnt             ULong(0)
     _***_
 
 
-    IF StrPos( GCL:CommandLineFlags, '^[\\|\/]install',True)
+    IF StrPos( GCL:CommandLineFlags, '^[\\|\/|-]install',True)
         GCL:CommandLineAction = 1
 
         Compile('_***_',ISEQ:Debug)
@@ -69,7 +69,7 @@ Loc:Cnt             ULong(0)
 
     End
 
-    IF StrPos( GCL:CommandLineFlags, '^[\\|\/]check',True)
+    IF StrPos( GCL:CommandLineFlags, '^[\\|\/|-]check',True)
         GCL:CommandLineAction = 2
 
         Compile('_***_',ISEQ:Debug)
@@ -78,7 +78,7 @@ Loc:Cnt             ULong(0)
 
     End
 
-    IF StrPos( GCL:CommandLineFlags, '^[\\|\/]delete',True)
+    IF StrPos( GCL:CommandLineFlags, '^[\\|\/|-]delete',True)
         GCL:CommandLineAction = 3
 
         Compile('_***_',ISEQ:Debug)

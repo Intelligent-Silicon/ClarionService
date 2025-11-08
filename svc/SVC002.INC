@@ -1,2 +1,0 @@
-  MODULE('SVC002.CLW')
-  END
