@@ -28,7 +28,7 @@ Run from NOT Service Control Manager (SCM), ie File Explorer, Windows Run, loade
    
 If no command line switch/flag is specified, default action is for Check to process.
 
-Prefix a switch/flag with \, / or - , eg \install, /install or -install.
+Prefix a switch/flag with \\, / or - , eg \install, /install or -install.
 
 If the Service Control Manager (SCM) calls/loads the program, SCM runs like this:
 
