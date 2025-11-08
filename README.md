@@ -81,6 +81,6 @@ Usual manifest rules apply, ie to correctly detect the version of Windows, inclu
   </trustInfo>
   
  
-
+Any problems, check your Anti Virus/ Windows Defender isnt blocking it without notice.
  
  
