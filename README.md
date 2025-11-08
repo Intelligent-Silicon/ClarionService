@@ -91,6 +91,12 @@ Any problems, check your Anti Virus/ Windows Defender isnt blocking it without n
 
 # TODO
 
-The SERVICE_CONTROL_USERMODEREBOOT code is disabled because this makes the app/service hang on Windows 11. see https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nc-winsvc-lphandler_function_ex
+The SERVICE_CONTROL_USERMODEREBOOT code is disabled because this makes the app/service hang on Windows 11. 
+
+See
+
+https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nc-winsvc-lphandler_function_ex
+
+https://learn.microsoft.com/en-us/windows/win32/services/what-s-new-in-services-for-windows-8
 
 I havent been able to track down any reason why this happens and the LLM's dont have any answer either.
