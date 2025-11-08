@@ -20,7 +20,7 @@ ISEQ:Debug      Equate(True)
     _***_
 
 
-    IF NOT pdwControlsAccepted  ! Default switch it all on
+    IF NOT pdwControlsAccepted  ! Default switch it all on except SERVICE_ACCEPT_USERMODEREBOOT... see notes below.
 
         Compile('_***_',ISEQ:Debug)         ! SetServiceStatusControlsAccepted(   GSS:dwControlsAccepted )
         DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted         = 0' )
@@ -80,8 +80,11 @@ ISEQ:Debug      Equate(True)
 
         IF GOVIE:WindowsVersion > 5.2 ! Vista and Server 2008 onwards
 
-            ! In Practice as these are higher numbers, the OS, whatever version it is, will simply ignore these values....
-            ! Windows Server 2003, Windows XP:  This value is not supported.
+!            ! Windows Server 2003, Windows XP:  This value is not supported.
+!            ! Use this Control wisely. See https://learn.microsoft.com/en-us/windows/win32/services/service-control-handler-function
+!            ! It receives this control first and blocks the SERVICE_ACCEPT_SHUTDOWN control signal until PRESHUTDOWN timeout occurs or any code for this
+!            ! in the Handler completes.
+
             GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )
             Compile('_***_',ISEQ:Debug)
             DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN )' )
@@ -89,30 +92,31 @@ ISEQ:Debug      Equate(True)
 
             IF GOVIE:WindowsVersion > 6.0 ! Win 7 and Server 2008 R2 onwards
                 ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista:  This control code is not supported.
+
                 GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )
                 Compile('_***_',ISEQ:Debug)
                 DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE )' )
                 _***_
 
+!               You need to register the Trigger events first, before you can use this
+!               https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events
 
                 GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )
                 Compile('_***_',ISEQ:Debug)
                 DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT )' )
                 _***_
 
-
-                GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )
-                Compile('_***_',ISEQ:Debug)
-                DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )' )
-                _***_
-
-
                 IF GOVIE:WindowsVersion > 6.1 ! Windows 8 and Server 2012 onwards
 
-                    ! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista, Windows Server 2008 R2, Windows 7:  This control code is not supported.
-                    Compile('_***_',ISEQ:Debug)
-                    DSS('SetServiceStatusControlsAccepted : SetServiceStatusControlsAccepted( GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') )' )
-                    _***_
+!                    ! For some reason this does not work on Win 11 22H2 and havent found out why.
+!                    ! Nothing is mentioned in the various Windows API doc webpages, various LLM's dont have any valid suggestions either
+!                    ! so for now this a mystery
+
+!                    GSS:dwControlsAccepted         = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )
+!                    Compile('_***_',ISEQ:Debug)
+!                    DSS('SetServiceStatusControlsAccepted : GSS:dwControlsAccepted (' & GSS:dwControlsAccepted & ') = Bor( GSS:dwControlsAccepted, ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT )' )
+!                    _***_
+
 
                 End ! IF GOVIE:WindowsVersion > 6.1 ! Windows 8 and Server 2012 onwards
 
@@ -128,26 +132,6 @@ ISEQ:Debug      Equate(True)
         _***_
 
     End
-
-
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_STOP                      Equate(00000001h) ! Allows the service to be stopped; enables STOP notification.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PAUSE_CONTINUE            Equate(00000002h) ! Supports pause and continue operations; enables PAUSE and CONTINUE notifications.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SHUTDOWN                  Equate(00000004h) ! Receives system shutdown notification; only system can send SHUTDOWN.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PARAMCHANGE               Equate(00000008h) ! Allows rereading of startup parameters without restart; enables PARAMCHANGE notification.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_NETBINDCHANGE             Equate(00000010h) ! Accepts binding changes without restart; enables NETBINDADD/REMOVE/ENABLE/DISABLE notifications.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_HARDWAREPROFILECHANGE     Equate(00000020h) ! Enables notification when hardware profile changes; triggers SERVICE_CONTROL_HARDWAREPROFILECHANGE.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_POWEREVENT                Equate(00000040h) ! Enables power status change notifications; triggers SERVICE_CONTROL_POWEREVENT.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_SESSIONCHANGE             Equate(00000080h) ! Enables session status change notifications; triggers SERVICE_CONTROL_SESSIONCHANGE.
-!
-!! Windows Server 2003, Windows XP:  This value is not supported.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_PRESHUTDOWN               Equate(00000100h) ! Enables preshutdown task handling; only system can send PRESHUTDOWN (unsupported on XP/2003).
-!
-!! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista:  This control code is not supported.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TIMECHANGE                Equate(00000200h) ! 1... Enables system time change notifications; triggers SERVICE_CONTROL_TIMECHANGE (unsupported pre-Vista).
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_TRIGGEREVENT              Equate(00000400h) ! Enables trigger event notifications; triggers SERVICE_CONTROL_TRIGGEREVENT (unsupported pre-Vista).
-!
-!! Windows Server 2003, Windows XP, Windows Server 2008, Windows Vista, Windows Server 2008 R2, Windows 7:  This control code is not supported.
-!ISEQ:SetServiceStatus:ControlsAccepted:SERVICE_ACCEPT_USERMODEREBOOT            Equate(00000800h) ! Enables user-initiated reboot notifications; triggers SERVICE_CONTROL_USERMODEREBOOT (unsupported pre-Win8).
     Compile('_***_',ISEQ:Debug)
     DSS('SetServiceStatusControlsAccepted : Start' )
     _***_

@@ -1,3 +1,3 @@
   MODULE('SVC016.CLW')
-CreateWaitObjectEvents PROCEDURE
+CreateWaitObjectEventHandles PROCEDURE
   END

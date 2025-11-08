@@ -435,26 +435,24 @@ ISEQ:Debug      Equate(True)
 !                                                                            ! Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This control code is not supported.
 !
 !
-    OF ISEQ:ServiceHandlerExA:SERVICE_CONTROL_DEVICEEVENT    ! Notifies a service registered for a service trigger event that the event has occurred.
+    OF ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT    ! Notifies a service registered for a service trigger event that the event has occurred.
         Compile('_***_',ISEQ:Debug)
-        DSS('ServiceHandlerExA : OF ISEQ:ServiceHandlerExA:SERVICE_CONTROL_DEVICEEVENT (' & ISEQ:ServiceHandlerExA:SERVICE_CONTROL_DEVICEEVENT & ')' )
+        DSS('ServiceHandlerExA : OF ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT (' & ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT & ')' )
         _***_
 
-        Glo:RVBool      = ISWA_SetEvent( GLLA:SetEvent, GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT )
+        Glo:RVBool      = ISWA_SetEvent( GLLA:SetEvent, ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT )
         Glo:LastError   = ISWA_GetLastError()
 
         Compile('_***_',ISEQ:Debug)
-        DSS('ServiceHandlerExA : Glo:RVBool (' & Glo:RVBool & ') = ISWA_SetEvent( GLLA:SetEvent (' & GLLA:SetEvent & ') , GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') )' )
+        DSS('ServiceHandlerExA : Glo:RVBool (' & Glo:RVBool & ') = ISWA_SetEvent( GLLA:SetEvent (' & GLLA:SetEvent & ') , ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT (' & ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT & ') )' )
         DSS('ServiceHandlerExA : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
         DSS('ServiceHandlerExA : Return ISEQ:ServiceHandlerExA:NO_ERROR (' & ISEQ:ServiceHandlerExA:NO_ERROR & ')' )
         _***_
 
         Return ISEQ:ServiceHandlerExA:NO_ERROR
 
-
-!ISEQ:ServiceHandlerExA:SERVICE_CONTROL_DEVICEEVENT      Equate(00000040h)   ! Notifies a service that the user has initiated a reboot.
+!ISEQ:ServiceHandlerExA:SERVICE_CONTROL_USERMODEREBOOT   Equate(00000040h)   ! Notifies a service that the user has initiated a reboot.
 !                                                                            ! Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This control code is not supported.
-!
     Else
         Compile('_***_',ISEQ:Debug)
         DSS('ServiceHandlerExA : Else' )

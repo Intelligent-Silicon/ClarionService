@@ -697,6 +697,10 @@ GetVersionExA          PROCEDURE   !
                                          Long plpEventAttributes, Long plpName, Ulong dwFlags, Ulong dwDesiredAccess ), Long, Proc, Name('ISWA_CreateEventExA')
      
      
+     ISWA_CloseHandle(                   Long pProcedureAddress, |
+                                         Long phObject ), Bool, Proc, Name('ISWA_CloseHandle')
+     
+     
      ISWA_WaitForSingleObject(           Long pProcedureAddress, |
                                          Long phHandle, Ulong pdwMilliseconds ), Ulong, Proc, Name('api_WaitForSingleObject')
      
@@ -1158,6 +1162,7 @@ GLLA:RegisterServiceCtrlHandlerA LONG
 GLLA:SetServiceStatus LONG
 GLLA:CreateEventA    LONG
 GLLA:CreateEventExA  LONG
+GLLA:CloseHandle     LONG
 GLLA:GetVersionExA   LONG
 GLLA:ExitProcess     LONG
 GLLA:OpenProcess     LONG

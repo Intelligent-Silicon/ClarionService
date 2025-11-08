@@ -81,6 +81,11 @@ Usual manifest rules apply, ie to correctly detect the version of Windows, inclu
   </trustInfo>
   
  
-Any problems, check your Anti Virus/ Windows Defender isnt blocking it without notice.
- 
- 
+Any problems, check your Anti Virus/ Windows Defender isnt blocking it without notice. Sometimes, you will see the code run in Debugview, but the SCM will not display the latest SetServiceStatus messages that's already been run.
+
+
+# TODO
+
+The SERVICE_CONTROL_USERMODEREBOOT code is disabled because this makes the app hang on Windows 11. see https://learn.microsoft.com/en-us/windows/win32/api/winsvc/nc-winsvc-lphandler_function_ex
+
+I havent been able to track down any reason why this happens and the LLM's dont have any answer either.

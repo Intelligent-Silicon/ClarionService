@@ -347,6 +347,17 @@ LoadLibraryEx   Procedure(String pDllFilename, Long pOrdinal, String pProcedureN
         GLLA:CreateEventExA  = Loc:ReturnAddress
     End
 
+    Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','CloseHandle')
+
+    Compile('_***_',ISEQ:Debug)
+    DSS('LoadLibraryEx : Loc:ReturnAddress (' & Loc:ReturnAddress & ') = LoadLibraryEx(''Kernel32.dll'',''CloseHandle'')' )
+    _***_
+
+
+    IF Loc:ReturnAddress
+        GLLA:CloseHandle  = Loc:ReturnAddress
+    End
+
     Loc:ReturnAddress = LoadLibraryEx('Kernel32.dll','WaitForSingleObject')
 
     Compile('_***_',ISEQ:Debug)

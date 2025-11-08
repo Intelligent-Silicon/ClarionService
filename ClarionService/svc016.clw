@@ -7,21 +7,21 @@
                      END
 
 
-CreateWaitObjectEvents PROCEDURE                           ! Declare Procedure
+CreateWaitObjectEventHandles PROCEDURE                     ! Declare Procedure
 ISEQ:Debug      Equate(True)
   CODE
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : Start' )
+    DSS('CreateWaitObjectEventHandles : Start' )
     _***_
     Clear( GWOE:Event:WaitObjectHandlesArray )
     GWOE:Event:WaitObjectHandlesArrayCnt = 0
     IF GOVIE:WindowsVersion => 6.0 ! Vista onwards use CreateEventExA else CreateEventA
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_STOP
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -37,12 +37,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_STOP
@@ -55,17 +55,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_STOP
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PAUSE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -80,12 +80,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
 
@@ -99,17 +99,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PAUSE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_CONTINUE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -124,12 +124,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
 
@@ -143,18 +143,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_CONTINUE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -171,11 +171,11 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
@@ -188,17 +188,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -213,12 +213,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
@@ -231,17 +231,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDADD
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -258,12 +258,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDADD
@@ -276,18 +276,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDADD
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -304,12 +304,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
@@ -322,18 +322,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -350,12 +350,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
@@ -368,18 +368,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -396,12 +396,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
@@ -414,18 +414,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -442,12 +442,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
@@ -460,18 +460,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -488,12 +488,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
@@ -506,18 +506,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -532,12 +532,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
@@ -550,17 +550,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_POWEREVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -575,12 +575,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_POWEREVENT
@@ -593,18 +593,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_POWEREVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -619,12 +619,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
@@ -637,18 +637,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -663,12 +663,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
@@ -681,18 +681,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -707,12 +707,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
@@ -725,18 +725,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -751,12 +751,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
@@ -769,18 +769,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventExA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
     _***_
 
 
@@ -795,12 +795,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventExA( GLLA:CreateEventExA (' & GLLA:CreateEventExA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : ISEQ:WaitObject:SYNCHRONIZE (' & ISEQ:WaitObject:SYNCHRONIZE & ') )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
@@ -812,19 +812,19 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') )' )
         _***_
 
 
     End
     Else ! CreateEventA
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_STOP
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -839,12 +839,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_STOP
@@ -857,17 +857,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_STOP
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_STOP (' & GWOE:Event:SERVICE_ACCEPT_STOP & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PAUSE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -881,12 +881,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
 
@@ -900,17 +900,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PAUSE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PAUSE (' & GWOE:Event:SERVICE_ACCEPT_PAUSE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_CONTINUE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -924,12 +924,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
 
@@ -943,18 +943,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_CONTINUE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_CONTINUE (' & GWOE:Event:SERVICE_ACCEPT_CONTINUE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -970,11 +970,11 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
@@ -987,17 +987,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_SHUTDOWN & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1011,12 +1011,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
@@ -1029,17 +1029,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE (' & GWOE:Event:SERVICE_ACCEPT_PARAMCHANGE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDADD
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1055,12 +1055,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDADD
@@ -1073,18 +1073,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDADD
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDADD (' & GWOE:Event:SERVICE_ACCEPT_NETBINDADD & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1100,12 +1100,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
@@ -1118,18 +1118,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDCHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1145,12 +1145,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
@@ -1163,18 +1163,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDREMOVE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1190,12 +1190,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
@@ -1208,18 +1208,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDENABLE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1235,12 +1235,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
@@ -1253,18 +1253,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE (' & GWOE:Event:SERVICE_ACCEPT_NETBINDDISABLE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1280,12 +1280,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
@@ -1298,18 +1298,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT (' & GWOE:Event:SERVICE_ACCEPT_DEVICEEVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1323,12 +1323,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
@@ -1341,17 +1341,17 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE (' & GWOE:Event:SERVICE_ACCEPT_HARDWAREPROFILECHANGE & ') )' )
         _***_
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_POWEREVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1365,12 +1365,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_POWEREVENT
@@ -1383,18 +1383,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_POWEREVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_POWEREVENT (' & GWOE:Event:SERVICE_ACCEPT_POWEREVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1408,11 +1408,11 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
@@ -1425,18 +1425,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE (' & GWOE:Event:SERVICE_ACCEPT_SESSIONCHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1450,12 +1450,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
@@ -1468,18 +1468,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN (' & GWOE:Event:SERVICE_ACCEPT_PRESHUTDOWN & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1493,12 +1493,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
@@ -1511,18 +1511,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TIMECHANGE (' & GWOE:Event:SERVICE_ACCEPT_TIMECHANGE & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1536,12 +1536,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
@@ -1554,18 +1554,18 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT (' & GWOE:Event:SERVICE_ACCEPT_TRIGGEREVENT & ') )' )
         _***_
 
 
     End
     Compile('_***_',ISEQ:Debug)         ! CreateEventA  - Creates a WaitObject GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
     _***_
 
 
@@ -1579,12 +1579,12 @@ ISEQ:Debug      Equate(True)
     Glo:LastError   = ISWA_GetLastError()
 
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0, |' )
-    DSS('CreateWaitObjectEvents : 0 )' )
-    DSS('CreateWaitObjectEvents : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
+    DSS('CreateWaitObjectEventHandles : GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') = ISWA_CreateEventA( GLLA:CreateEventA (' & GLLA:CreateEventA & '), |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0, |' )
+    DSS('CreateWaitObjectEventHandles : 0 )' )
+    DSS('CreateWaitObjectEventHandles : Glo:LastError (' & Glo:LastError & ') = ISWA_GetLastError()' )
     _***_
 
     IF NOT GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
@@ -1596,13 +1596,13 @@ ISEQ:Debug      Equate(True)
         GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ]  = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT
 
         Compile('_***_',ISEQ:Debug)
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
-        DSS('CreateWaitObjectEvents : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') )' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArrayCnt (' & GWOE:Event:WaitObjectHandlesArrayCnt & ') += 1' )
+        DSS('CreateWaitObjectEventHandles : GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] (' & GWOE:Event:WaitObjectHandlesArray[ GWOE:Event:WaitObjectHandlesArrayCnt ] & ' = GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT (' & GWOE:Event:SERVICE_ACCEPT_USERMODEREBOOT & ') )' )
         _***_
 
 
     End
     End
     Compile('_***_',ISEQ:Debug)
-    DSS('CreateWaitObjectEvents : End' )
+    DSS('CreateWaitObjectEventHandles : End' )
     _***_

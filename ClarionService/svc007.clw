@@ -5,6 +5,7 @@
                      MAP
                        INCLUDE('SVC007.INC'),ONCE        !Local module procedure declarations
                        INCLUDE('SVC016.INC'),ONCE        !Req'd for module callout resolution
+                       INCLUDE('SVC031.INC'),ONCE        !Req'd for module callout resolution
                      END
 
 
@@ -63,13 +64,6 @@ ISEQ:Debug      Equate(True)
     _***_
 
     SetServiceStatusServiceType( ISEQ:SetServiceStatus:ServiceType:SERVICE_WIN32_OWN_PROCESS )
-    Compile('_***_',ISEQ:Debug)         ! SetServiceStatusControlsAccepted() - This will load the defaults which is all of them
-    DSS('ServiceMain : SetServiceStatusControlsAccepted()' )
-    _***_
-
-
-    SetServiceStatusControlsAccepted()
-
     Compile('_***_',ISEQ:Debug)         ! SetServiceStatusExitCode( ISEQ:SetServiceStatus:WindowsErrorExitCode:NO_ERROR )
     DSS('ServiceMain : SetServiceStatusExitCode( ISEQ:SetServiceStatus:WindowsErrorExitCode:NO_ERROR (' & ISEQ:SetServiceStatus:WindowsErrorExitCode:NO_ERROR & ') )')
     _***_
@@ -88,8 +82,8 @@ ISEQ:Debug      Equate(True)
 
 
     SetServiceStatus()
-    CreateWaitObjectEvents()
-    IF GLO:LastError  ! Return if a CreateWaitObjectEvents Failed
+    CreateWaitObjectEventHandles()
+    IF GLO:LastError  ! Return if a CreateWaitObjectEventHandles Failed
         Return GLO:LastError
     End
     Compile('_***_',ISEQ:Debug)         ! SetServiceStatusCurrentState( ISEQ:SetServiceStatus:CurrentState:SERVICE_RUNNING )
@@ -98,6 +92,13 @@ ISEQ:Debug      Equate(True)
 
 
     SetServiceStatusCurrentState( ISEQ:SetServiceStatus:CurrentState:SERVICE_RUNNING, 0 , 0 )
+    Compile('_***_',ISEQ:Debug)         ! SetServiceStatusControlsAccepted() - This will load the defaults which is all of them - Only when SERVICE_RUNNING is set
+    DSS('ServiceMain : SetServiceStatusControlsAccepted()' )
+    _***_
+
+
+    SetServiceStatusControlsAccepted()
+
     Compile('_***_',ISEQ:Debug)         ! SetServiceStatus()
     DSS('ServiceMain : SetServiceStatus()')
     _***_
@@ -475,6 +476,7 @@ ISEQ:Debug      Equate(True)
 
 
     End ! Loop
+    CloseWaitObjectEventHandles()
     Compile('_***_',ISEQ:Debug)
     DSS('ServiceMain : End' )
     _***_

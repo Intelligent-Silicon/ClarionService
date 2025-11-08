@@ -147,9 +147,7 @@ Member()
     ISWA_CreateEventExA(            *api_CreateEventExA pProcedureAddress, |
                                     Long plpEventAttributes, Long plpName, Ulong dwFlags, Ulong dwDesiredAccess ), Long, Proc, Name('ISWA_CreateEventExA')
 
-    api_CloseHandle(                Long phObject ), Bool, Pascal, Type
-    ISWA_CloseHandle(               *api_CloseHandle pProcedureAddress, |
-                                    Long phObject ), Bool, Proc, Name('ISWA_CloseHandle')
+
 
     api_WaitForSingleObject(        Long phHandle, Ulong pdwMilliseconds ), Ulong, Pascal, Type
     ISWA_WaitForSingleObject(       *api_WaitForSingleObject pProcedureAddress, |
@@ -351,12 +349,6 @@ ISWA_CreateEventExA             Function( *api_CreateEventExA pProcedureAddress,
                                 Long plpEventAttributes, Long plpName, Ulong dwFlags, Ulong dwDesiredAccess )
     Code
     Return pProcedureAddress( plpEventAttributes, plpName, dwFlags, dwDesiredAccess )
-
-
-ISWA_CloseHandle                Function( *api_CloseHandle pProcedureAddress, |
-                                    Long phObject )
-    Code
-    Return pProcedureAddress( phObject )
 
 
 ISWA_WaitForSingleObject        Function( *api_WaitForSingleObject pProcedureAddress, |
